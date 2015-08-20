@@ -88,7 +88,7 @@ public class PFColorHash {
                     ret = p + (q - p) * 6 * ret
                 } else if (ret < 0.5) {
                     ret = q
-                } else if (color < 2 / 3) {
+                } else if (ret < 2 / 3) {
                     ret = p + (q - p) * 6 * (2 / 3 - ret)
                 } else {
                     ret = p
@@ -100,7 +100,7 @@ public class PFColorHash {
     }
     
     private final func rgb2hex(r: Int, g: Int, b: Int) -> String {
-        return String(format:"%02X", r) + String(format:"%02X", g) + String(format:"%02X", b)
+        return String(format:"%X", r) + String(format:"%X", g) + String(format:"%X", b)
     }
 }
 
