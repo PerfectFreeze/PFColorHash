@@ -14,12 +14,12 @@ public class PFColorHash {
     
     lazy var saturation: [Double] = [0.35, 0.5, 0.65]
     
-    lazy var hash = { (str: String) -> Int in
-        let seed1 = 131
-        let seed2 = 137
-        var ret = 0
+    lazy var hash = { (str: String) -> Int64 in
+        let seed1: Int64 = 131
+        let seed2: Int64 = 137
+        var ret: Int64 = 0
         var hashString = str + "x"
-        let maxSafeInt: Int = 9007199254740991 / seed2
+        let maxSafeInt: Int64 = 9007199254740991 / seed2
         for (index, element) in enumerate(hashString) {
             if (ret > maxSafeInt) {
                 ret = ret / seed2
@@ -45,18 +45,25 @@ public class PFColorHash {
         self.saturation = saturation
     }
     
-    init(hash: (String) -> Int) {
+    init(hash: (String) -> Int64) {
         self.hash = hash
     }
     
     // MARK: Public Methods
     final func hsl(str: String) -> (h: Double, s: Double, l: Double) {
-        var hashValue = hash(str)
+        var hashValue: Int64 = hash(str)
         let h = hashValue % 359
+        
         hashValue = hashValue / 360
-        let s = saturation[hashValue % saturation.count]
-        hashValue = hashValue / saturation.count
-        let l = lightness[hashValue % lightness.count]
+        var count: Int64 = Int64(saturation.count)
+        var index = Int(hashValue % count)
+        let s = saturation[index]
+        
+        hashValue = hashValue / count
+        count = Int64(lightness.count)
+        index = Int(hashValue % count)
+        let l = lightness[index]
+        
         return (Double(h), Double(s), Double(l))
     }
 
