@@ -19,7 +19,8 @@ public class PFColorHash {
         let seed2: Int64 = 137
         var ret: Int64 = 0
         var hashString = str + "x"
-        let maxSafeInt: Int64 = 9007199254740991 / seed2
+        var constantInt: Int64 = 9007199254740991   // pow(2, 53) - 1
+        let maxSafeInt: Int64 = constantInt / seed2
         for (index, element) in enumerate(hashString) {
             if (ret > maxSafeInt) {
                 ret = ret / seed2
