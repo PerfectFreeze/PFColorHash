@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name                  = "PFColorHash"
-  s.version               = "0.1"
+  s.version               = "0.1.1"
   s.summary               = "Generate color based on the given string."
   s.homepage              = "https://github.com/PerfectFreeze/PFColorHash"
   s.license               = { :type => "MIT", :file => "LICENSE" }
