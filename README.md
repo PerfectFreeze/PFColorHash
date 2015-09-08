@@ -1,5 +1,7 @@
 # PFColorHash
 
+[![Cocoapods](https://cocoapod-badges.herokuapp.com/v/PFColorHash/badge.png)](http://cocoapods.org/?q=PFColorHash)
+
 Generate color based on the given string. Thanks to [color-hash](https://github.com/zenozeng/color-hash).
 
 ![Sample](Sample.gif)
@@ -24,8 +26,8 @@ colorHash.hex('Hello World') // '#8696c4'
 ### Custom Hash Function / Lightness / Saturation
 
 ```Swift
-let colorHash = PFColorHash(hash: { (str: String) -> Int in
-	var hashValue = 0
+let colorHash = PFColorHash(hash: { (str: String) -> Int64 in
+	var hashValue: Int64 = 0
 	// Your Hash Function Here
 	return hashValue
 })
