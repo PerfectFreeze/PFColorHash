@@ -21,7 +21,7 @@ public class PFColorHash {
         var hashString = str + "x"
         var constantInt: Int64 = 9007199254740991   // pow(2, 53) - 1
         let maxSafeInt: Int64 = constantInt / seed2
-        for (index, element) in enumerate(hashString) {
+        for element in hashString.characters {
             if (ret > maxSafeInt) {
                 ret = ret / seed2
             }
@@ -82,8 +82,8 @@ public class PFColorHash {
     // MARK: Private Methods
     private final func hsl2rgb(h: Double, s: Double, l:Double) -> (r: Int, g: Int, b: Int) {
         let hue = h / 360
-        var q = l < 0.5 ? l * (1 + s) :l + s - l * s
-        var p = 2 * l - q
+        let q = l < 0.5 ? l * (1 + s) :l + s - l * s
+        let p = 2 * l - q
         let array = [hue + 1/3, hue, hue - 1/3].map({ (color: Double) -> Int in
                 var ret = color
                 if (ret < 0) {
