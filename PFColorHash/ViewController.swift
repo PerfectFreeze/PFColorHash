@@ -32,16 +32,16 @@ class ViewController: UIViewController {
 
     func setupTextField() {
         // Add bottom line
-        var bottomBorder = CALayer()
+        let bottomBorder = CALayer()
         bottomBorder.frame = CGRectMake(0.0, inputTextField.frame.size.height - 1, inputTextField.frame.size.width, 1.0);
         bottomBorder.backgroundColor = UIColor.blackColor().CGColor
         inputTextField.layer.addSublayer(bottomBorder)
         // Add target event
-        inputTextField.addTarget(self, action: "textFieldDidChange:", forControlEvents: UIControlEvents.EditingChanged)
+        inputTextField.addTarget(self, action: #selector(ViewController.textFieldDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
     }
 
     func textFieldDidChange(textField: UITextField) {
-        states.append(textField.text)
+        states.append(textField.text!)
         tableView.reloadData()
     }
     
