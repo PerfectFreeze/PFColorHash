@@ -2,6 +2,8 @@
 
 [![Cocoapods](https://cocoapod-badges.herokuapp.com/v/PFColorHash/badge.png)](http://cocoapods.org/?q=PFColorHash)
 
+**Swift 3.0 SUPPORT!**
+
 Generate color based on the given string. Thanks to [color-hash](https://github.com/zenozeng/color-hash).
 
 ![Sample](Sample.gif)
