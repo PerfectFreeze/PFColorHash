@@ -33,19 +33,19 @@ class ViewController: UIViewController {
     func setupTextField() {
         // Add bottom line
         let bottomBorder = CALayer()
-        bottomBorder.frame = CGRectMake(0.0, inputTextField.frame.size.height - 1, inputTextField.frame.size.width, 1.0);
-        bottomBorder.backgroundColor = UIColor.blackColor().CGColor
+        bottomBorder.frame = CGRect(x: 0.0, y: inputTextField.frame.size.height - 1, width: inputTextField.frame.size.width, height: 1.0);
+        bottomBorder.backgroundColor = UIColor.black.cgColor
         inputTextField.layer.addSublayer(bottomBorder)
         // Add target event
-        inputTextField.addTarget(self, action: #selector(ViewController.textFieldDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
+        inputTextField.addTarget(self, action: #selector(ViewController.textFieldDidChange(_:)), for: UIControlEvents.editingChanged)
     }
 
-    func textFieldDidChange(textField: UITextField) {
+    func textFieldDidChange(_ textField: UITextField) {
         states.append(textField.text!)
         tableView.reloadData()
     }
     
-    @IBAction func clearBtnPressed(sender: AnyObject) {
+    @IBAction func clearBtnPressed(_ sender: AnyObject) {
         states.removeAll()
         inputTextField.text = nil
         tableView.reloadData()
@@ -53,25 +53,25 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: UITableViewDataSource {
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return states.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let index = states.count - indexPath.row - 1
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let index = states.count - (indexPath as NSIndexPath).row - 1
         let str = states[index]
         let color = UIColor(red: (CGFloat)(colorHash.rgb(str).r) / 255.0,
                           green: (CGFloat)(colorHash.rgb(str).g) / 255.0,
                            blue: (CGFloat)(colorHash.rgb(str).b) / 255.0,
                           alpha: 1.0)
         
-        let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "cell")
+        let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "cell")
         
-        let imageView = UIImageView(frame: CGRectMake(view.frame.width - 46, (cell.frame.height - 30) / 2.0, 30, 30))
+        let imageView = UIImageView(frame: CGRect(x: view.frame.width - 46, y: (cell.frame.height - 30) / 2.0, width: 30, height: 30))
         imageView.backgroundColor = color
         cell.addSubview(imageView)
         
-        cell.selectionStyle = .None
+        cell.selectionStyle = .none
         cell.textLabel?.text = str
         cell.textLabel?.frame.origin.x += 16
         cell.detailTextLabel?.text = "#" + colorHash.hex(str)
