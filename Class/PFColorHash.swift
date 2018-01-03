@@ -25,7 +25,7 @@ open class PFColorHash {
             if (ret > maxSafeInt) {
                 ret = ret / seed2
             }
-            ret = ret * seed1 + element.unicodeScalarCodePoint()
+            ret = ret * seed1 + Int64(element.unicodeScalarCodePoint())
         }
         return ret
     }
