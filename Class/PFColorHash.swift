@@ -69,12 +69,12 @@ open class PFColorHash {
     }
 
     
-    final func rgb(_ str: String) -> (r: Int, g: Int, b: Int) {
+    final public func rgb(_ str: String) -> (r: Int, g: Int, b: Int) {
         let hslValue = hsl(str)
         return hsl2rgb(hslValue.h, s: hslValue.s, l: hslValue.l)
     }
     
-    final func hex(_ str: String) -> String {
+    final public func hex(_ str: String) -> String {
         let rgbValue = rgb(str)
         return rgb2hex(rgbValue.r, g: rgbValue.g, b: rgbValue.b)
     }
