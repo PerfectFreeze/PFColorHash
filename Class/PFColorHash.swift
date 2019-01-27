@@ -21,32 +21,32 @@ open class PFColorHash {
         let hashString = str + "x"
         var constantInt: Int64 = 9007199254740991   // pow(2, 53) - 1
         let maxSafeInt: Int64 = constantInt / seed2
-        for element in hashString.characters {
+        for element in hashString {
             if (ret > maxSafeInt) {
                 ret = ret / seed2
             }
-            ret = ret * seed1 + element.unicodeScalarCodePoint()
+            ret = ret * seed1 + Int64(element.unicodeScalarCodePoint())
         }
         return ret
     }
     
     // MARK: Init Methods
-    init() {}
+    public init() {}
     
-    init(lightness: [Double]) {
+    public init(lightness: [Double]) {
         self.lightness = lightness
     }
     
-    init(saturation: [Double]) {
+    public init(saturation: [Double]) {
         self.saturation = saturation
     }
     
-    init(lightness: [Double], saturation: [Double]) {
+    public init(lightness: [Double], saturation: [Double]) {
         self.lightness = lightness
         self.saturation = saturation
     }
     
-    init(hash: @escaping (String) -> Int64) {
+    public init(hash: @escaping (String) -> Int64) {
         self.hash = hash
     }
     
@@ -69,12 +69,12 @@ open class PFColorHash {
     }
 
     
-    final func rgb(_ str: String) -> (r: Int, g: Int, b: Int) {
+    final public func rgb(_ str: String) -> (r: Int, g: Int, b: Int) {
         let hslValue = hsl(str)
         return hsl2rgb(hslValue.h, s: hslValue.s, l: hslValue.l)
     }
     
-    final func hex(_ str: String) -> String {
+    final public func hex(_ str: String) -> String {
         let rgbValue = rgb(str)
         return rgb2hex(rgbValue.r, g: rgbValue.g, b: rgbValue.b)
     }
