@@ -21,11 +21,11 @@ open class PFColorHash {
         let hashString = str + "x"
         var constantInt: Int64 = 9007199254740991   // pow(2, 53) - 1
         let maxSafeInt: Int64 = constantInt / seed2
-        for element in hashString.characters {
+        for element in hashString {
             if (ret > maxSafeInt) {
                 ret = ret / seed2
             }
-            ret = ret * seed1 + element.unicodeScalarCodePoint()
+            ret = ret * seed1 + Int64(element.unicodeScalarCodePoint())
         }
         return ret
     }

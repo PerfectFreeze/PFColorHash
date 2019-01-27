@@ -37,10 +37,10 @@ class ViewController: UIViewController {
         bottomBorder.backgroundColor = UIColor.black.cgColor
         inputTextField.layer.addSublayer(bottomBorder)
         // Add target event
-        inputTextField.addTarget(self, action: #selector(ViewController.textFieldDidChange(_:)), for: UIControlEvents.editingChanged)
+        inputTextField.addTarget(self, action: #selector(ViewController.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
     }
 
-    func textFieldDidChange(_ textField: UITextField) {
+    @objc func textFieldDidChange(_ textField: UITextField) {
         states.append(textField.text!)
         tableView.reloadData()
     }
@@ -65,7 +65,7 @@ extension ViewController: UITableViewDataSource {
                            blue: (CGFloat)(colorHash.rgb(str).b) / 255.0,
                           alpha: 1.0)
         
-        let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "cell")
+        let cell: UITableViewCell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: "cell")
         
         let imageView = UIImageView(frame: CGRect(x: view.frame.width - 46, y: (cell.frame.height - 30) / 2.0, width: 30, height: 30))
         imageView.backgroundColor = color
