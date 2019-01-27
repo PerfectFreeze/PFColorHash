@@ -31,22 +31,22 @@ open class PFColorHash {
     }
     
     // MARK: Init Methods
-    init() {}
+    public init() {}
     
-    init(lightness: [Double]) {
+    public init(lightness: [Double]) {
         self.lightness = lightness
     }
     
-    init(saturation: [Double]) {
+    public init(saturation: [Double]) {
         self.saturation = saturation
     }
     
-    init(lightness: [Double], saturation: [Double]) {
+    public init(lightness: [Double], saturation: [Double]) {
         self.lightness = lightness
         self.saturation = saturation
     }
     
-    init(hash: @escaping (String) -> Int64) {
+    public init(hash: @escaping (String) -> Int64) {
         self.hash = hash
     }
     
