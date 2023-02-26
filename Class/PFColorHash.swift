@@ -6,7 +6,11 @@
 //  Copyright (c) 2015 Cee. All rights reserved.
 //
 
-import Foundation
+#if os(macOS)
+import AppKit
+#else
+import UIKit
+#endif
 
 open class PFColorHash {
     
@@ -67,7 +71,18 @@ open class PFColorHash {
         
         return (Double(h), Double(s), Double(l))
     }
-
+    
+    #if os(macOS)
+    public func nsColor(_ str: String) -> NSColor {
+        let hsl = self.hsl(str)
+        return NSColor(hue: hsl.h, saturation: hsl.s, lightness: hsl.l, alpha: 1)
+    }
+    #else
+    public func uiColor(_ str: String) -> UIColor {
+        let hsl = self.hsl(str)
+        return UIColor(hue: hsl.h, saturation: hsl.s, lightness: hsl.l, alpha: 1)
+    }
+    #endif
     
     final public func rgb(_ str: String) -> (r: Int, g: Int, b: Int) {
         let hslValue = hsl(str)
@@ -122,4 +137,28 @@ extension Character
         
         return Int(scalars[scalars.startIndex].value)
     }
+}
+
+#if os(macOS)
+typealias SystemColor = NSColor
+#else
+typealias SystemColor = UIColor
+#endif
+
+extension SystemColor {
+
+    // https://gist.github.com/adamgraham/3ada1f7f4cdf8131dd3d2d95bd116cfc
+    convenience init(hue: CGFloat, saturation: CGFloat, lightness: CGFloat, alpha: CGFloat = 1.0) {
+
+        let h = hue / 360.0
+        var s = saturation
+        let l = lightness
+
+        let t = s * ((l < 0.5) ? l : (1.0 - l))
+        let b = l + t
+        s = (l > 0.0) ? (2.0 * t / b) : 0.0
+
+        self.init(hue: h, saturation: s, brightness: b, alpha: alpha)
+    }
+
 }

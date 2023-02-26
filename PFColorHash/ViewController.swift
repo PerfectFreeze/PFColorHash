@@ -60,10 +60,7 @@ extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let index = states.count - (indexPath as NSIndexPath).row - 1
         let str = states[index]
-        let color = UIColor(red: (CGFloat)(colorHash.rgb(str).r) / 255.0,
-                          green: (CGFloat)(colorHash.rgb(str).g) / 255.0,
-                           blue: (CGFloat)(colorHash.rgb(str).b) / 255.0,
-                          alpha: 1.0)
+        let color = colorHash.uiColor(str)
         
         let cell: UITableViewCell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: "cell")
         
